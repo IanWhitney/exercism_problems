@@ -1,20 +1,12 @@
 
 defmodule Words do
-  
   def count(phrase) do
-    split_phrase_into_words = fn(p) -> Regex.split %r/\W+/, p end
-    downcase_elements = fn(l) -> Enum.map(l, fn(x) ->
-      String.downcase(x) end ) end
-    remove_empty_elements = fn(l) -> Enum.reject(l, fn(x) ->
-      x == "" end) end  
-    
-    cleaned_words =
-    remove_empty_elements.(downcase_elements.(split_phrase_into_words.(phrase)))
+    word_list = Phrase.to_word_list(phrase)
 
     HashDict.new(
-      cleaned_words, fn(word) -> 
+      word_list, fn(word) -> 
         {word, Enum.count(
-          cleaned_words, fn(x) -> 
+          word_list, fn(x) -> 
             (x == word) 
           end)
         } 
@@ -23,3 +15,26 @@ defmodule Words do
   end
 end
 
+defmodule Phrase do
+  def to_word_list(phrase) do
+    List.compact(List.downcase(Phrase.to_list(phrase)))
+  end
+
+  def to_list(phrase) do
+    Regex.split %r/\W+/, phrase
+  end
+end
+
+defmodule List  do
+  def downcase(list) do
+    Enum.map(list, fn(x) ->
+      String.downcase(x) 
+    end)
+  end
+
+  def compact(list) do
+    Enum.reject(list, fn(x) ->
+      x == "" 
+    end)
+  end
+end
