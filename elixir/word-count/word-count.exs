@@ -17,7 +17,9 @@ end
 
 defmodule Phrase do
   def to_word_list(phrase) do
-    List.compact(List.downcase(Phrase.to_list(phrase)))
+    Phrase.to_list(phrase)
+      |> List.downcase
+      |> List.compact
   end
 
   def to_list(phrase) do
