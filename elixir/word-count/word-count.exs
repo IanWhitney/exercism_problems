@@ -1,4 +1,3 @@
-
 defmodule Words do
   def count(phrase) do
     word_list = Phrase.to_word_list(phrase)
@@ -27,16 +26,7 @@ defmodule Phrase do
   end
 end
 
-defmodule List  do
-  def downcase(list) do
-    Enum.map(list, fn(x) ->
-      String.downcase(x) 
-    end)
-  end
-
-  def compact(list) do
-    Enum.reject(list, fn(x) ->
-      x == "" 
-    end)
-  end
+defmodule List do
+  def downcase(list), do: Enum.map(list, &(String.downcase(&1)))
+  def compact(list), do: Enum.reject(list, &(&1 == ""))
 end
