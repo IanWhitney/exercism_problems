@@ -2,9 +2,18 @@ class Hamming
   def self.compute(a,b)
     a = Strand.parse(a)
     b = Strand.parse(b)
-    main = (a.count < b.count) ? [a,b] : [b,a]
-    y = main[0].zip(main[1])
+    y = self.combine(self.sort(a,b))
     y.inject(0) {|ret, h| ret += 1 if h.first != h.last; ret}
+  end
+
+  private
+
+  def self.combine(sorted_strands)
+    sorted_strands[0].zip(sorted_strands[1])
+  end
+
+  def self.sort(strand_one, strand_two)
+    [strand_one,strand_two].sort_by { |strand| strand.length }
   end
 end
 
@@ -23,5 +32,9 @@ class Strand
 
   def each(&block)
     collection.each(&block)
+  end
+
+  def length
+    collection.count
   end
 end
