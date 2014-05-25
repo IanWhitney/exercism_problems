@@ -20,8 +20,6 @@ end
 class Strand
   include Enumerable
 
-  attr_accessor :collection
-
   def self.parse(strand_string)
     self.new(strand_string)
   end
@@ -37,4 +35,8 @@ class Strand
   def length
     collection.count
   end
+
+  private
+
+  attr_accessor :collection
 end
