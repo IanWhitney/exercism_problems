@@ -1,36 +1,36 @@
 class Hamming
   def self.compute(a,b)
-    y = Strands.new(
+    Strands.difference(
       Strand.parse(a),
       Strand.parse(b)
-    ).sort.combine
-    y.inject(0) {|ret, h| ret += 1 if h.first != h.last; ret}
+    ).count
   end
 end
 
 class Strands
-  include Enumerable
+  def self.difference(*strands)
+    self.new(strands).difference
+  end
 
-  def initialize(*strands)
+  def initialize(strands)
     self.collection = strands
   end
 
-  def each(&block)
-    collection.each(&block)
-  end
-
-  def combine
-    collection[0].zip(collection[1])
-  end
-
-  def sort
-    collection.sort_by! { |strand| strand.length }
-    self
+  def difference
+    combined.select {|strand_set| strand_set.first != strand_set.last}
   end
 
   private
 
   attr_accessor :collection
+
+  def combined
+    sorted[0].zip(sorted[1])
+  end
+
+  def sorted
+    @sorted ||= collection.sort_by { |strand| strand.length }
+  end
 end
 
 class Strand
