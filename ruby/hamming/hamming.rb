@@ -37,11 +37,11 @@ class Strand
   include Enumerable
 
   def self.parse(strand_string)
-    self.new(strand_string)
+    self.new(strand_string.split(//))
   end
 
   def initialize(strand_string)
-    self.collection = strand_string.split(//)
+    self.collection = Array(strand_string)
   end
 
   def each(&block)
