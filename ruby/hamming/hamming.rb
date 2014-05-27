@@ -6,10 +6,15 @@ end
 
 module Hammable
   def -(other)
-    sorted = [self,other].sort_by { |x| x.count }
-    combined = sorted.first.zip(sorted.last)
-    x = combined.select {|strand_set| strand_set.first != strand_set.last}
-    self.class.new(x)
+    self.zip(other).select {|strand_set| Comparison.different?(strand_set)}
+  end
+
+  class Comparison
+    def self.different?(couple)
+      couple.first != couple.last &&
+      !couple.last.nil? &&
+      !couple.first.nil?
+    end
   end
 end
 
