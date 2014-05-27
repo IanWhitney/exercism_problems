@@ -13,23 +13,12 @@ module Hammable
   end
 end
 
-class Strand
-  include Enumerable
+require 'delegate'
+
+class Strand < SimpleDelegator
   include Hammable
 
   def self.parse(strand_string)
     self.new(strand_string.split(//))
   end
-
-  def initialize(strand_array)
-    self.collection = Array(strand_array)
-  end
-
-  def each(&block)
-    collection.each(&block)
-  end
-
-  private
-
-  attr_accessor :collection
 end
