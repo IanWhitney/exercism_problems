@@ -9,7 +9,7 @@ class Bob
   end
 end
 
-class TeenagerResponse
+class Response
   def self.to(statement)
     self.new(statement).say
   end
@@ -32,6 +32,12 @@ class TeenagerResponse
 
   private
 
+  attr_accessor :statement
+end
+
+class TeenagerResponse < Response
+  private
+
   def to_silence
     "Fine. Be that way!"
   end
@@ -47,9 +53,24 @@ class TeenagerResponse
   def to_everything
     "Whatever."
   end
+end
 
-  attr_accessor :statement
+class CollegeResponse < Response
+  def to_silence
+    "Broseph! Don't leave me hanging!"
+  end
 
+  def to_yelling
+    "Bro!"
+  end
+
+  def to_question
+    "Bro?"
+  end
+
+  def to_everything
+    "Bro."
+  end
 end
 
 class StatementParser
