@@ -105,7 +105,7 @@ class StatementParser
   end
 
   def question?
-    statement[-1..-1] == "?"
+    statement.end_with?("?")
   end
 
   attr_accessor :statement
