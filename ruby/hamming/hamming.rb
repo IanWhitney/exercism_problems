@@ -1,12 +1,16 @@
 class Hamming
   def self.compute(a,b)
-    Strand.parse(a).hamming_difference(Strand.parse(b)).count
+    HammingDifference.new(Strand.parse(a), Strand.parse(b)).count
   end
 end
 
-module Hammable
-  def hamming_difference(other)
-    self.zip(other).select {|strand_set| Comparison.different?(strand_set)}
+class HammingDifference
+  def initialize(obj1, obj2)
+    self.collection = obj1.zip(obj2).select {|strand_set| Comparison.different?(strand_set)}
+  end
+
+  def count
+    collection.count
   end
 
   class Comparison
@@ -16,13 +20,14 @@ module Hammable
       !couple.first.nil?
     end
   end
+
+  private
+  attr_accessor :collection
 end
 
+
 require 'delegate'
-
 class Strand < SimpleDelegator
-  include Hammable
-
   def self.parse(strand_string)
     self.new(strand_string.split(//))
   end
