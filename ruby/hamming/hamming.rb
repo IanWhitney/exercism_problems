@@ -1,11 +1,11 @@
 class Hamming
   def self.compute(a,b)
-    (Strand.parse(a) - Strand.parse(b)).count
+    Strand.parse(a).hamming_difference(Strand.parse(b)).count
   end
 end
 
 module Hammable
-  def -(other)
+  def hamming_difference(other)
     self.zip(other).select {|strand_set| Comparison.different?(strand_set)}
   end
 
