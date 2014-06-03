@@ -1,16 +1,15 @@
 class Hamming
-  def self.compute(a,b)
-    HammingDifference.new(Strand.parse(a), Strand.parse(b)).count
+  def self.compute(a, b, type = Strand)
+    self.new(a, b, type).count
   end
-end
 
-class HammingDifference
-  def initialize(obj1, obj2)
-    self.collection = obj1.zip(obj2).select {|strand_set| Comparison.different?(strand_set)}
+  def initialize(a, b, type)
+    self.one = type.parse(a)
+    self.two = type.parse(b)
   end
 
   def count
-    collection.count
+    one.zip(two).select {|pair| Comparison.different?(pair)}.count
   end
 
   class Comparison
@@ -22,9 +21,9 @@ class HammingDifference
   end
 
   private
-  attr_accessor :collection
-end
 
+  attr_accessor :one, :two
+end
 
 require 'delegate'
 class Strand < SimpleDelegator
