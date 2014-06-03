@@ -1,7 +1,7 @@
 require 'delegate'
 class Gigasecond < SimpleDelegator
   def date
-    __getobj__ + 11574 #number of days in a gigasecond
+    __getobj__.gigaseconds_since(1)
   end
 end
 
