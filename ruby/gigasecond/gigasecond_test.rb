@@ -16,7 +16,7 @@ class GigasecondTest < MiniTest::Unit::TestCase
     1000.times do |x|
       random_date = Time.at(rand * Time.now.to_i).to_date
       random_gigaseconds = rand(1000)
-      expected = random_date + (11574 * random_gigaseconds)
+      expected = random_date + (10**9 * random_gigaseconds / (24 * 60 * 60))
 
       assert_equal expected, random_date.gigaseconds_since(random_gigaseconds), "Date: #{random_date} plus #{random_gigaseconds} gigaseconds should be #{expected} using gigaseconds_since"
     end

@@ -12,9 +12,9 @@ class DateTime
 end
 
 class Date
-  DAYS_PER_GIGASECOND = 11574
+  SECONDS_PER_DAY = 86400
   def gigaseconds_since(multiple)
-    self + (DAYS_PER_GIGASECOND * multiple)
+    self + (multiple.gigaseconds / SECONDS_PER_DAY)
   end
 end
 
