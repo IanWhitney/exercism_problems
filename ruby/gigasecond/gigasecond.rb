@@ -1,14 +1,16 @@
 require 'delegate'
-class Gigasecond < SimpleDelegator
-  def date
-    __getobj__.gigaseconds_since(1)
+class Gigasecond
+  def initialize(start_date)
+    self.start_date = start_date
   end
-end
 
-class DateTime
-  def gigaseconds_since(multiple)
-    self + multiple.gigaseconds
+  def date
+    start_date.gigaseconds_since(1)
   end
+
+  private
+
+  attr_accessor :start_date
 end
 
 class Date
