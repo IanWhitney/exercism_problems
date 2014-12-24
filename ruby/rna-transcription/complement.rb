@@ -1,16 +1,20 @@
 class Complement
   def self.of_dna(strand)
-    DNA.new(strand).complement
+    DNA.new(strand).to_rna
   end
 
   def self.of_rna(strand)
-    RNA.new(strand).complement
+    RNA.new(strand).to_dna
   end
 end
 
 class RNA
   attr_accessor :strand
 
+  def self.complement_for(nucleotide)
+    {"C" => "G", "G" => "C", "T" => "A", "A" => "U"}[nucleotide]
+  end
+
   def initialize(strand)
     self.strand = strand
   end
@@ -19,29 +23,21 @@ class RNA
     strand.chars
   end
 
-  def complement
+  def to_dna
     nucleotides.inject("") do |ret, nucleotide|
-      ret << complement_of(nucleotide)
+      ret << DNA.complement_for(nucleotide)
     end
   end
 
-  def complement_of(nucleotide)
-    case nucleotide
-    when 'C'
-      'G'
-    when 'G'
-      'C'
-    when 'U'
-      'A'
-    when 'A'
-      'T'
-    end
-  end
 end
 
 class DNA
   attr_accessor :strand
 
+  def self.complement_for(nucleotide)
+    {"C" => "G", "G" => "C", "U" => "A", "A" => "T"}[nucleotide]
+  end
+
   def initialize(strand)
     self.strand = strand
   end
@@ -50,22 +46,9 @@ class DNA
     strand.chars
   end
 
-  def complement
+  def to_rna
     nucleotides.inject("") do |ret, nucleotide|
-      ret << complement_of(nucleotide)
-    end
-  end
-
-  def complement_of(nucleotide)
-    case nucleotide
-    when 'C'
-      'G'
-    when 'G'
-      'C'
-    when 'T'
-      'A'
-    when 'A'
-      'U'
+      ret << RNA.complement_for(nucleotide)
     end
   end
 end
