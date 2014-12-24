@@ -1,13 +1,15 @@
 class Complement
   def self.of_dna(strand)
-    ret = ""
-    strand.each_char { |x| ret << find_dna_complement_of(x) }
-    ret
+    build_complement_for(strand, "dna")
   end
 
   def self.of_rna(strand)
+    build_complement_for(strand, "rna")
+  end
+
+  def self.build_complement_for(strand, type)
     ret = ""
-    strand.each_char { |x| ret << find_rna_complement_of(x) }
+    strand.each_char { |x| ret << public_send("find_#{type}_complement_of".to_sym, x) }
     ret
   end
 
