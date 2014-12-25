@@ -8,12 +8,8 @@ class Complement
   end
 end
 
-class RNA
+class NucleicAcid
   attr_accessor :strand
-
-  def self.complement_for(nucleotide)
-    {"C" => "G", "G" => "C", "T" => "A", "A" => "U"}[nucleotide]
-  end
 
   def initialize(strand)
     self.strand = strand
@@ -24,31 +20,46 @@ class RNA
   end
 
   def to_dna
+    raise StandardError, "Call this on descendants"
+  end
+
+  def to_rna
+    raise StandardError, "Call this on descendants"
+  end
+
+  def self.complement_for(nucleotide)
+    raise StandardError, "Call this on descendants"
+  end
+end
+
+class RNA < NucleicAcid
+  def self.complement_for(nucleotide)
+    {"C" => "G", "G" => "C", "T" => "A", "A" => "U"}[nucleotide]
+  end
+
+  def to_dna
     nucleotides.inject("") do |ret, nucleotide|
       ret << DNA.complement_for(nucleotide)
     end
   end
 
+  def to_rna
+    self
+  end
 end
 
-class DNA
-  attr_accessor :strand
-
+class DNA < NucleicAcid
   def self.complement_for(nucleotide)
     {"C" => "G", "G" => "C", "U" => "A", "A" => "T"}[nucleotide]
-  end
-
-  def initialize(strand)
-    self.strand = strand
-  end
-
-  def nucleotides
-    strand.chars
   end
 
   def to_rna
     nucleotides.inject("") do |ret, nucleotide|
       ret << RNA.complement_for(nucleotide)
     end
+  end
+
+  def to_dna
+    self
   end
 end
