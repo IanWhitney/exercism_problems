@@ -19,6 +19,12 @@ class NucleicAcid
     strand.chars
   end
 
+  def transcribe_to(acid)
+    nucleotides.inject("") do |ret, nucleotide|
+      ret << acid.complement_for(nucleotide)
+    end
+  end
+
   def to_dna
     raise StandardError, "Call this on descendants"
   end
@@ -38,9 +44,7 @@ class RNA < NucleicAcid
   end
 
   def to_dna
-    nucleotides.inject("") do |ret, nucleotide|
-      ret << DNA.complement_for(nucleotide)
-    end
+    transcribe_to(DNA)
   end
 
   def to_rna
@@ -54,9 +58,7 @@ class DNA < NucleicAcid
   end
 
   def to_rna
-    nucleotides.inject("") do |ret, nucleotide|
-      ret << RNA.complement_for(nucleotide)
-    end
+    transcribe_to(RNA)
   end
 
   def to_dna
