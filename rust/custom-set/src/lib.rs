@@ -24,4 +24,8 @@ impl <T: PartialEq> CustomSet<T> {
     pub fn contains(&self, other: &T) -> bool {
         self.collection.contains(other)
     }
+
+    pub fn is_disjoint(&self, other: &Self) -> bool {
+        !self.collection.iter().any(|x| other.contains(x))
+    }
 }

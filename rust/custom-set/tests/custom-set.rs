@@ -29,15 +29,14 @@ fn test_from_iter() {
     assert!(!set.contains(&4));
 }
 
-// #[test]
-// #[ignore]
-// fn test_is_disjoint() {
-//     assert!(make_set(vec!()).is_disjoint(&make_set(vec!())));
-//     assert!(make_set(vec!(1)).is_disjoint(&make_set(vec!())));
-//     assert!(make_set(vec!()).is_disjoint(&make_set(vec!(1))));
-//     assert!(make_set(vec!(1, 2)).is_disjoint(&make_set(vec!(3, 4))));
-//     assert!(!(make_set(vec!(1, 2)).is_disjoint(&make_set(vec!(2, 4)))));
-// }
+#[test]
+fn test_is_disjoint() {
+    assert!(make_set(vec!()).is_disjoint(&make_set(vec!())));
+    assert!(make_set(vec!(1)).is_disjoint(&make_set(vec!())));
+    assert!(make_set(vec!()).is_disjoint(&make_set(vec!(1))));
+    assert!(make_set(vec!(1, 2)).is_disjoint(&make_set(vec!(3, 4))));
+    assert!(!(make_set(vec!(1, 2)).is_disjoint(&make_set(vec!(2, 4)))));
+}
 //
 // #[test]
 // #[ignore]
