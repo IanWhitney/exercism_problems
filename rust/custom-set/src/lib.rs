@@ -32,4 +32,8 @@ impl <T: PartialEq> CustomSet<T> {
     pub fn is_subset(&self, other: &Self) -> bool {
         self.collection.iter().all(|x| other.contains(x))
     }
+
+    pub fn is_superset(&self, other: &Self) -> bool {
+        other.collection.iter().all(|x| self.contains(x))
+    }
 }

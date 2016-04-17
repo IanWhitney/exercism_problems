@@ -48,18 +48,17 @@ fn test_is_subset() {
     assert!(!make_set(vec!(1, 2)).is_subset(&make_set(vec!(2, 4))));
     assert!(make_set(vec!(1, 2)).is_subset(&make_set(vec!(1, 2, 4))));
 }
-//
-// #[test]
-// #[ignore]
-// fn test_is_superset() {
-//     assert!(make_set(vec!()).is_superset(&make_set(vec!())));
-//     assert!(make_set(vec!(1)).is_superset(&make_set(vec!())));
-//     assert!(!make_set(vec!()).is_superset(&make_set(vec!(1))));
-//     assert!(!make_set(vec!(1, 2)).is_superset(&make_set(vec!(3, 4))));
-//     assert!(!make_set(vec!(1, 2)).is_superset(&make_set(vec!(2, 4))));
-//     assert!(!make_set(vec!(1, 2)).is_superset(&make_set(vec!(1, 2, 4))));
-//     assert!(make_set(vec!(1, 2, 3)).is_superset(&make_set(vec!(1, 2))));
-// }
+
+#[test]
+fn test_is_superset() {
+    assert!(make_set(vec!()).is_superset(&make_set(vec!())));
+    assert!(make_set(vec!(1)).is_superset(&make_set(vec!())));
+    assert!(!make_set(vec!()).is_superset(&make_set(vec!(1))));
+    assert!(!make_set(vec!(1, 2)).is_superset(&make_set(vec!(3, 4))));
+    assert!(!make_set(vec!(1, 2)).is_superset(&make_set(vec!(2, 4))));
+    assert!(!make_set(vec!(1, 2)).is_superset(&make_set(vec!(1, 2, 4))));
+    assert!(make_set(vec!(1, 2, 3)).is_superset(&make_set(vec!(1, 2))));
+}
 //
 // fn difference(a: Vec<usize>, b: Vec<usize>) -> Vec<usize> {
 //     let mut v = make_set(a).difference(&make_set(b)).iter().map(|n| n.clone()).collect::<Vec<usize>>();
