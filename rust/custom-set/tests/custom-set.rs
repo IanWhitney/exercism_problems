@@ -60,21 +60,20 @@ fn test_is_superset() {
     assert!(make_set(vec!(1, 2, 3)).is_superset(&make_set(vec!(1, 2))));
 }
 //
-// fn difference(a: Vec<usize>, b: Vec<usize>) -> Vec<usize> {
-//     let mut v = make_set(a).difference(&make_set(b)).iter().map(|n| n.clone()).collect::<Vec<usize>>();
-//     v.sort();
-//     v
-// }
-//
-// #[test]
-// #[ignore]
-// fn test_difference() {
-//     assert_eq!(difference(vec!(), vec!()), vec!());
-//     assert_eq!(difference(vec!(), vec!(3, 2, 5)), vec!());
-//     assert_eq!(difference(vec!(1, 2, 3, 4), vec!()), vec!(1, 2, 3, 4));
-//     assert_eq!(difference(vec!(1, 2, 3, 4), vec!(3, 2, 5)), vec!(1, 4));
-// }
-//
+fn difference(a: Vec<usize>, b: Vec<usize>) -> Vec<usize> {
+    let mut v = make_set(a).difference(&make_set(b)).iter().map(|n| n.clone()).collect::<Vec<usize>>();
+    v.sort();
+    v
+}
+
+#[test]
+fn test_difference() {
+    assert_eq!(difference(vec!(), vec!()), vec!());
+    assert_eq!(difference(vec!(), vec!(3, 2, 5)), vec!());
+    assert_eq!(difference(vec!(1, 2, 3, 4), vec!()), vec!(1, 2, 3, 4));
+    assert_eq!(difference(vec!(1, 2, 3, 4), vec!(3, 2, 5)), vec!(1, 4));
+}
+
 // fn intersection(a: Vec<usize>, b: Vec<usize>) -> Vec<usize> {
 //     let mut v = make_set(a).intersection(&make_set(b)).iter().map(|n| n.clone()).collect::<Vec<usize>>();
 //     v.sort();

@@ -2,7 +2,7 @@ pub struct CustomSet<T> {
     collection: Vec<T>
 }
 
-impl <T: PartialEq> CustomSet<T> {
+impl <T: PartialEq + Clone> CustomSet<T> {
     pub fn new() -> CustomSet<T> {
         CustomSet { collection: Vec::new() }
     }
@@ -35,5 +35,15 @@ impl <T: PartialEq> CustomSet<T> {
 
     pub fn is_superset(&self, other: &Self) -> bool {
         other.is_subset(&self)
+    }
+
+    pub fn difference(&self, other: &Self) -> Vec<T> {
+        let mut s =  Vec::new();
+        for element in self.collection.iter() {
+            if !other.contains(element){
+                s.push(element.clone());
+            }
+        }
+        s
     }
 }
