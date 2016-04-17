@@ -4,13 +4,13 @@ extern crate custom_set as set;
 
 use set::CustomSet;
 
-// fn make_set(vec: Vec<usize>) -> CustomSet<usize> {
-//     let mut set = CustomSet::new();
-//     for element in vec {
-//         set.insert(element);
-//     }
-//     set
-// }
+fn make_set(vec: Vec<usize>) -> CustomSet<usize> {
+    let mut set = CustomSet::new();
+    for element in vec {
+        set.insert(element);
+    }
+    set
+}
 
 #[test]
 fn test_empty_set() {
@@ -19,15 +19,15 @@ fn test_empty_set() {
     assert_eq!(set.is_empty(), true);
 }
 
-// #[test]
-// fn test_from_iter() {
-    // let set = make_set(vec!(1, 2, 3, 2));
-    // assert_eq!(set.len(), 3);
-    // assert!(!set.is_empty());
-    // assert!(set.contains(&1));
-    // assert!(set.contains(&3));
-    // assert!(!set.contains(&4));
-// }
+#[test]
+fn test_from_iter() {
+    let set = make_set(vec!(1, 2, 3, 2));
+    assert_eq!(set.len(), 3);
+    assert!(!set.is_empty());
+    assert!(set.contains(&1));
+    assert!(set.contains(&3));
+    assert!(!set.contains(&4));
+}
 
 // #[test]
 // #[ignore]
